@@ -134,40 +134,41 @@ Deployed Backend: [https://clariox.onrender.com](https://clariox.onrender.com)
 
 ## 📐 System Architecture
 
-`Client (Browser)
+`Client (Browser)`
        ↓
-Frontend (Vercel - React + Vite)
+`Frontend (Vercel - React + Vite)`
        ↓ 
-REST API (Render - FastAPI)
-       ↓
-SQLite Database` 
+`REST API (Render - FastAPI)`
+      ↓
+`SQLite Database` 
 
 Authentication Flow:
 
-`Register/Login 
+`Register/Login`
+↓
+`JWT Token Issued`
       ↓
-JWT Token Issued
+`Stored in localStorage`
       ↓
-Stored in localStorage
-      ↓
-Attached to API requests (Authorization: Bearer token)` 
+`Attached to API requests (Authorization: Bearer token)` 
 
 Auto-save Flow:
 
-`Editor Change
+`Editor Change`
      ↓
-Zustand State Update 
+`Zustand State Update `
      ↓
-Debounce Timer
+`Debounce Timer`
      ↓
-PATCH /api/posts/{id}
+`PATCH /api/posts/{id}`
      ↓ 
-Database  Update` 
+`Database  Update` 
 
 
 ## 📂 Project Structure (Monorepo)
 
 `clariox/
+
 │
 ├── frontend/
 │   ├── src/
@@ -183,8 +184,7 @@ Database  Update`
     │   ├── routes/
     │   ├── models.py 
     │   ├── schemas.py 
-    │   ├──  core/
-    │   ├──  services/
+    │   ├── core/
     │   └── main.py 
     └── requirements.txt` 
 
@@ -194,17 +194,17 @@ Database  Update`
 
 ### Backend
 
-`cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload` 
+`cd backend`
+`python -m venv venv`
+`venv\Scripts\activate`
+`pip install -r requirements.txt`
+`uvicorn app.main:app --reload` 
 
 ### Frontend
 
-`cd frontend
-npm install
-npm run dev` 
+`cd frontend`
+`npm install`
+`npm run dev` 
 
 
 
