@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// 🔥 Global 401 handler
+// global 401 handler
 api.interceptors.response.use(
   (response) => response,
   (error) => {

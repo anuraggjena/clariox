@@ -35,26 +35,22 @@ export default function Login() {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-zinc-950 lg:grid lg:grid-cols-2 font-sans">
       
-      {/* --- LEFT COLUMN: BRAND VISUAL --- */}
+      {/* --- LEFT COLUMN --- */}
       <div className="hidden lg:flex flex-col justify-between p-10 m-4 rounded-[2rem] bg-zinc-900 relative overflow-hidden">
-        {/* Abstract Fluid Background Image */}
         <div className="absolute inset-0 z-0">
           <img
             src="/background.jpg"
             alt="Abstract Fluid Colors"
             className="h-full w-full object-cover opacity-90"
           />
-          {/* Dark gradient overlay for text readability at the bottom */}
           <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/90"></div>
         </div>
 
-        {/* Top Brand Text */}
         <div className="relative z-10 flex items-center text-xs font-semibold tracking-widest text-white/80 uppercase">
           <span className="h-px w-8 bg-white/80 mr-4"></span>
           ClarioX
         </div>
 
-        {/* Bottom Tagline */}
         <div className="relative z-10 mt-auto pb-4">
           <h1 className="text-5xl font-serif text-white leading-[1.1] mb-6 tracking-tight">
             Think Clearly. <br /> Write Better.
@@ -66,11 +62,11 @@ export default function Login() {
         </div>
       </div>
 
-      {/* --- RIGHT COLUMN: LOGIN FORM --- */}
+      {/* --- RIGHT COLUMN */}
       <div className="flex items-center justify-center p-8 sm:p-12 relative">
         <div className="mx-auto w-full max-w-100 space-y-8">
           
-          {/* Logo / Header */}
+          {/* Logo */}
           <div className="flex flex-col items-center text-center">
             <div className="flex items-center gap-2">
               <img src="/logo.svg" alt="ClarioX Logo" className="h-30 w-30" />

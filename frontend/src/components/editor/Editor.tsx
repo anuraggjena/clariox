@@ -82,7 +82,7 @@ export default function Editor({ title, setTitle }: { title: string, setTitle: (
         <div className="flex-1 overflow-y-auto w-full flex justify-center py-10 px-4 sm:px-8">
           
           {/* THE PAPER */}
-          <div className="w-full max-w-[816px] bg-white dark:bg-zinc-900 shadow-md ring-1 ring-zinc-200 dark:ring-zinc-800 min-h-[1056px] px-10 sm:px-24 py-16 flex flex-col shrink-0">
+          <div className="w-full max-w-204 bg-white dark:bg-zinc-900 shadow-md ring-1 ring-zinc-200 dark:ring-zinc-800 min-h-264 px-10 sm:px-24 py-16 flex flex-col shrink-0">
             
             {/* Title on Paper */}
             <input
@@ -95,7 +95,7 @@ export default function Editor({ title, setTitle }: { title: string, setTitle: (
             {/* Lexical Editor Content */}
             <div className="relative flex-1 cursor-text">
               <RichTextPlugin
-                contentEditable={<ContentEditable className="outline-none min-h-[500px] pb-32" />}
+                contentEditable={<ContentEditable className="outline-none min-h-125 pb-32" />}
                 placeholder={
                   <div className="absolute top-0 left-0 text-zinc-400 dark:text-zinc-500 pointer-events-none text-[17px] select-none">
                     Start writing...

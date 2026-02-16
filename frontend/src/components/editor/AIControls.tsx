@@ -34,7 +34,7 @@ export default function AIControls() {
   };
 
   return (
-    <div className="flex items-center p-1 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 dark:from-indigo-950/30 dark:to-purple-950/30 border border-indigo-100/50 dark:border-indigo-800/30 rounded-lg shrink-0 ml-4">
+    <div className="flex items-center p-1 bg-linear-to-r from-indigo-50/80 to-purple-50/80 dark:from-indigo-950/30 dark:to-purple-950/30 border border-indigo-100/50 dark:border-indigo-800/30 rounded-lg shrink-0 ml-4">
       <div className="flex items-center px-3 py-1 border-r border-indigo-200/50 dark:border-indigo-800/50 mr-1 select-none">
         <Sparkles className="h-3.5 w-3.5 text-indigo-500 mr-1.5 animate-pulse" />
         <span className="text-[10px] font-bold text-indigo-800 dark:text-indigo-300 uppercase tracking-widest hidden lg:inline-block">Assistant</span>

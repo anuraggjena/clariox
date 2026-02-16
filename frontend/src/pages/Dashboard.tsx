@@ -122,7 +122,7 @@ export default function Dashboard() {
     navigate("/login");
   };
 
-  // 1. Filter & Search Logic
+  // Filter & Search
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const titleMatches = post.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -132,7 +132,7 @@ export default function Dashboard() {
     });
   }, [posts, searchQuery, activeFilter]);
 
-  // 2. Pagination Logic
+  // Pagination
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / ITEMS_PER_PAGE));
   const paginatedPosts = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -151,7 +151,7 @@ export default function Dashboard() {
     <AppLayout>
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 font-sans flex flex-col">
         
-        {/* --- GLOBAL TOP NAVIGATION --- */}
+        {/* --- TOP NAVIGATION --- */}
         <nav className="w-full bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             {/* Branding */}
@@ -174,7 +174,7 @@ export default function Dashboard() {
           </div>
         </nav>
 
-        {/* --- MAIN DASHBOARD CONTENT --- */}
+        {/* --- DASHBOARD --- */}
         <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-10">
           
           {/* Dashboard Header */}
@@ -197,7 +197,7 @@ export default function Dashboard() {
             </Button>
           </div>
 
-          {/* Controls: Search & Segmented Filter */}
+          {/* Search & Filter */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 p-1.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm">
             
             <div className="flex w-full sm:w-auto p-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg">
@@ -307,7 +307,7 @@ export default function Dashboard() {
                 ))}
               </div>
 
-              {/* Pagination Controls */}
+              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 mt-10 pt-6">
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">

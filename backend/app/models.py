@@ -22,8 +22,10 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     title = Column(String, default="Untitled")
-    content = Column(JSON, nullable=False)  # Lexical JSON stored directly
-    status = Column(String, default="draft")  # draft | published
+    content = Column(JSON, nullable=False)
+    # Lexical JSON stored directly
+    status = Column(String, default="draft")
+    # draft | published
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

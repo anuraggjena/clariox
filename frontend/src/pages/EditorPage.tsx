@@ -8,7 +8,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import AutoSaveIndicator from "@/components/editor/AutoSaveIndicator";
 
-// Icons
+// icons
 import { ChevronLeft, Globe, Lock, MoreHorizontal, FileText } from "lucide-react";
 
 export default function EditorPage() {
@@ -70,13 +70,13 @@ export default function EditorPage() {
     <AppLayout>
       <div className="flex flex-col font-sans overflow-hidden">
         
-        {/* --- MAIN TOP HEADER --- */}
+        {/* --- TOP HEADER --- */}
         <header className="flex-none w-full bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center justify-between px-4 h-14 z-50">
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="h-8 w-8 text-zinc-500">
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            <div className="h-4 w-[1px] bg-zinc-300 dark:bg-zinc-700 mx-1"></div>
+            <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-700 mx-1"></div>
             <div className="flex items-center gap-2 px-2">
               <div className="bg-blue-600 p-1 rounded">
                 <FileText className="h-4 w-4 text-white" />
@@ -97,7 +97,7 @@ export default function EditorPage() {
 
           <div className="flex items-center gap-2 sm:gap-4">
             <AutoSaveIndicator />
-            <div className="h-4 w-[1px] bg-zinc-300 dark:bg-zinc-700 hidden sm:block"></div>
+            <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-700 hidden sm:block"></div>
             <Button variant="ghost" size="sm" onClick={manualSave} className="h-8 hidden sm:flex">
               Save
             </Button>
@@ -119,8 +119,7 @@ export default function EditorPage() {
           </div>
         </header>
 
-        {/* --- EDITOR INJECTION --- */}
-        {/* We pass the title down so it can be rendered on the physical "paper" */}
+        {/* --- EDITOR --- */}
         <div className="flex-1 overflow-hidden">
           <Editor title={title} setTitle={setTitle} />
         </div>

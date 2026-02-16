@@ -68,7 +68,7 @@ export default function Toolbar() {
 
   const activeStyle = "bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100";
   const inactiveStyle = "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50";
-  const divider = <div className="w-[1px] h-5 bg-zinc-200 dark:bg-zinc-800 mx-1 shrink-0"></div>;
+  const divider = <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-800 mx-1 shrink-0"></div>;
 
   return (
     <div 

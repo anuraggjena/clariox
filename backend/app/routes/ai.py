@@ -6,20 +6,12 @@ from ..services.groq_service import generate_text
 
 router = APIRouter(prefix="/api/ai", tags=["AI"])
 
-
-# -------------------------
 # Request Schema
-# -------------------------
-
 class AIRequest(BaseModel):
     text: str
     type: Literal["summary", "grammar", "improve", "conversational"]
 
-
-# -------------------------
 # AI Generate Endpoint
-# -------------------------
-
 @router.post("/generate")
 async def generate_ai(
     request: AIRequest,
