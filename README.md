@@ -7,6 +7,7 @@ ClarioX is a modern Notion-style block editor built with React and FastAPI.
 It supports structured rich text editing, auto-save with debounce, publishing workflow, and secure JWT authentication.
 
 Deployed Frontend: [https://clariox-snowy.vercel.app](https://clariox-snowy.vercel.app)
+
 Deployed Backend: [https://clariox.onrender.com](https://clariox.onrender.com)
 
 ----------
@@ -130,39 +131,6 @@ Deployed Backend: [https://clariox.onrender.com](https://clariox.onrender.com)
 -   Backend → Render
     
 -   Database → SQLite (file-based on Render)
-    
-
-## 📐 System Architecture
-
-`Client (Browser)`
-       ↓
-`Frontend (Vercel - React + Vite)`
-       ↓ 
-`REST API (Render - FastAPI)`
-      ↓
-`SQLite Database` 
-
-Authentication Flow:
-
-`Register/Login`
-↓
-`JWT Token Issued`
-      ↓
-`Stored in localStorage`
-      ↓
-`Attached to API requests (Authorization: Bearer token)` 
-
-Auto-save Flow:
-
-`Editor Change`
-     ↓
-`Zustand State Update `
-     ↓
-`Debounce Timer`
-     ↓
-`PATCH /api/posts/{id}`
-     ↓ 
-`Database  Update` 
 
 
 ## 📂 Project Structure (Monorepo)
