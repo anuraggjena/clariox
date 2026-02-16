@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader2, Mail, Lock, ArrowRight, PenLine } from "lucide-react";
+import { Loader2, Eye, EyeOff} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 export default function Login() {
@@ -14,6 +13,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,103 +33,154 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 p-4 font-sans text-zinc-900 dark:text-zinc-100">
-      <div className="w-full max-w-100">
-        
-        {/* Minimalist Branding Header */}
-        <div className="flex flex-col items-center mb-8 text-center">
-          <div className="h-12 w-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-sm">
-            <PenLine className="text-primary-foreground h-6 w-6" />
-          </div>
-          <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-          <p className="text-sm text-muted-foreground mt-2">
-            Sign in to your Smart Editor account
-          </p>
+    <div className="min-h-screen w-full bg-white dark:bg-zinc-950 lg:grid lg:grid-cols-2 font-sans">
+      
+      {/* --- LEFT COLUMN: BRAND VISUAL --- */}
+      <div className="hidden lg:flex flex-col justify-between p-10 m-4 rounded-[2rem] bg-zinc-900 relative overflow-hidden">
+        {/* Abstract Fluid Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/background.jpg"
+            alt="Abstract Fluid Colors"
+            className="h-full w-full object-cover opacity-90"
+          />
+          {/* Dark gradient overlay for text readability at the bottom */}
+          <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/90"></div>
         </div>
 
-        {/* Clean, Floating Card */}
-        <Card className="border-zinc-200 dark:border-zinc-800 shadow-sm dark:bg-zinc-900/50 backdrop-blur-sm">
-          <CardContent className="pt-6">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              
-              {/* Email Input */}
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-zinc-600 dark:text-zinc-400">
-                  Email Address
-                </Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    className="pl-10 bg-white dark:bg-zinc-900 transition-colors focus-visible:ring-1"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
+        {/* Top Brand Text */}
+        <div className="relative z-10 flex items-center text-xs font-semibold tracking-widest text-white/80 uppercase">
+          <span className="h-px w-8 bg-white/80 mr-4"></span>
+          ClarioX
+        </div>
 
-              {/* Password Input */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-zinc-600 dark:text-zinc-400">
-                    Password
-                  </Label>
-                </div>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    className="pl-10 bg-white dark:bg-zinc-900 transition-colors focus-visible:ring-1"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
+        {/* Bottom Tagline */}
+        <div className="relative z-10 mt-auto pb-4">
+          <h1 className="text-5xl font-serif text-white leading-[1.1] mb-6 tracking-tight">
+            Think Clearly. <br /> Write Better.
+          </h1>
+          <p className="text-zinc-300 text-sm max-w-sm leading-relaxed">
+            <strong>AI-Powered Structured Writing Platform.</strong> <br/>
+            Organize your thoughts, generate summaries, and refine your work seamlessly.
+          </p>
+        </div>
+      </div>
 
-              {/* Modern Error Callout */}
-              {error && (
-                <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-sm flex items-center">
-                  {error}
-                </div>
-              )}
-
-              {/* Enhanced Submit Button */}
-              <Button className="w-full h-10 mt-2 font-medium" disabled={loading}>
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
-                  </>
-                ) : (
-                  <>
-                    Sign In
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            </form>
-          </CardContent>
+      {/* --- RIGHT COLUMN: LOGIN FORM --- */}
+      <div className="flex items-center justify-center p-8 sm:p-12 relative">
+        <div className="mx-auto w-full max-w-100 space-y-8">
           
-          <CardFooter className="flex justify-center pb-6 border-t border-zinc-100 dark:border-zinc-800 pt-6 mt-2">
+          {/* Logo / Header */}
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center gap-2">
+              <img src="/logo.svg" alt="ClarioX Logo" className="h-30 w-30" />
+            </div>
+            
+            <h2 className="text-4xl font-sans tracking-tight text-zinc-900 dark:text-zinc-100">
+              Welcome Back
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-3">
+              Enter your email and password to access your account
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            
+            {/* Email Input */}
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="h-12 bg-zinc-50 dark:bg-zinc-900 border-transparent focus-visible:ring-1 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-700 transition-all rounded-xl px-4"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
+
+            {/* Password Input */}
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className="h-12 bg-zinc-50 dark:bg-zinc-900 border-transparent focus-visible:ring-1 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-700 transition-all rounded-xl px-4 pr-12"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 p-1"
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between pt-1 pb-2">
+              <div className="flex items-center space-x-2">
+                <input 
+                  type="checkbox" 
+                  id="remember" 
+                  className="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 h-4 w-4" 
+                />
+                <Label htmlFor="remember" className="text-xs font-normal text-zinc-600 dark:text-zinc-400 cursor-pointer">
+                  Remember me
+                </Label>
+              </div>
+              <a href="#" className="text-xs font-medium text-zinc-900 dark:text-zinc-100 hover:underline">
+                Forgot Password
+              </a>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="text-sm text-red-500 font-medium text-center">
+                {error}
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <Button 
+              className="w-full h-12 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white dark:bg-white dark:text-zinc-950 font-medium text-[15px] transition-all" 
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                "Sign In"
+              )}
+            </Button>
+          </form>
+
+          {/* Footer */}
+          <div className="mt-8 text-center">
             <p className="text-sm text-zinc-500 dark:text-zinc-400">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className="font-medium text-primary hover:underline hover:text-primary/90 transition-colors"
+                className="font-semibold text-zinc-900 dark:text-zinc-100 hover:underline"
               >
-                Create one
+                Sign Up
               </Link>
             </p>
-          </CardFooter>
-        </Card>
+          </div>
+          
+        </div>
       </div>
     </div>
   );

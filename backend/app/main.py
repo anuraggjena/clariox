@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routes import auth, posts, ai
 from .database import engine, Base
 
-app = FastAPI(title="Clariox AI API")
+app = FastAPI(title="ClarioX API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,4 +26,4 @@ app.include_router(ai.router)
 
 @app.get("/")
 def root():
-    return {"message": "Clariox AI Backend Running"}
+    return {"message": "ClarioX Backend Running"}

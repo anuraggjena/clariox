@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/playwrite-cu-guides": "^5.2.6",
     "@lexical/react": "^0.40.0",
     "@tailwindcss/vite": "^4.1.18",
     "autoprefixer": "^10.4.24",
     "axios": "^1.13.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.34.0",
     "lexical": "^0.40.0",
     "lucide-react": "^0.564.0",
