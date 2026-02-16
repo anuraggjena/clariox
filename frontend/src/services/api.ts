@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: "http://localhost:8000",
 });
 
-// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token;
 
@@ -15,5 +14,20 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+// 🔥 Global 401 handler
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      const logout = useAuthStore.getState().logout;
+      logout();
+
+      window.location.href = "/login";
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default api;

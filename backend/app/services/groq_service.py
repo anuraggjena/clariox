@@ -9,14 +9,19 @@ def build_system_prompt(mode: str) -> str:
         return (
             "You are an expert writing assistant. "
             "Provide a clear, concise, well-structured summary of the given content. "
-            "Maintain key ideas while reducing redundancy."
+            "Do not add commentary. "
+            "Do not explain that it is a summary. "
+            "Return only the summarized text."
         )
 
     if mode == "grammar":
         return (
-            "You are a professional editor. "
-            "Fix grammar, improve clarity, and refine sentence structure. "
-            "Do not change the original meaning."
+            "You are a professional grammar correction engine. "
+            "Rewrite the text with corrected grammar and clarity. "
+            "Do not explain the changes. "
+            "Do not provide alternatives. "
+            "Do not add commentary. "
+            "Return only the corrected text."
         )
 
     if mode == "improve":
@@ -24,6 +29,9 @@ def build_system_prompt(mode: str) -> str:
             "You are a professional content strategist. "
             "Enhance the writing to make it more engaging, structured, and impactful. "
             "Preserve the author's core message."
+            "Do not use markdown formatting symbols such as **, *, or #. "
+            "Do not explain changes. "
+            "Return only the improved version."
         )
 
     if mode == "conversational":

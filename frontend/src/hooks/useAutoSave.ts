@@ -1,44 +1,61 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "@/services/api";
-import { useEditorStore } from "@/store/useEditorStore";
-import { debounce } from "@/utils/debounce";
 
-export function useAutoSave() {
-  const {
-    currentPostId,
-    title,
-    content,
-    setSaving,
-    lastSavedHash,
-    setLastSavedHash,
-  } = useEditorStore();
+interface AutoSaveProps {
+  postId: number | null;
+  title: string;
+  content: any;
+}
 
-  const saveToServer = async () => {
-    if (!currentPostId || !content) return;
+export function useAutoSave({ postId, title, content }: AutoSaveProps) {
+  const timeoutRef = useRef<number | null>(null);
+  const isSavingRef = useRef(false);
 
-    const currentHash = JSON.stringify({ title, content });
+  const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
 
-    if (currentHash === lastSavedHash) return;
+  const save = async () => {
+    if (!postId) return;
+    if (isSavingRef.current) return;
 
     try {
-      setSaving(true);
+      isSavingRef.current = true;
+      setStatus("saving");
 
-      await api.patch(`/api/posts/${currentPostId}`, {
+      await api.patch(`/api/posts/${postId}`, {
         title,
         content,
       });
 
-      setLastSavedHash(currentHash);
-    } catch (error) {
-      console.error("Auto-save failed:", error);
+      setStatus("saved");
+
+      // after 1.5s revert to idle
+      setTimeout(() => {
+        setStatus("idle");
+      }, 1500);
+    } catch (err) {
+      console.error("Auto-save failed:", err);
     } finally {
-      setSaving(false);
+      isSavingRef.current = false;
     }
   };
 
-  const debouncedRef = useRef(debounce(saveToServer, 2000));
-
   useEffect(() => {
-    debouncedRef.current();
-  }, [content, title]);
+    if (!postId) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      save();
+    }, 1000); // 1s debounce
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [title, content, postId]);
+
+  return { status, manualSave: save };
 }

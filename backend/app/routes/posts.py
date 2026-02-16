@@ -8,6 +8,7 @@ from ..core.dependencies import get_current_user
 
 router = APIRouter(prefix="/api/posts", tags=["Posts"])
 
+
 @router.post("/", response_model=schemas.PostResponse)
 def create_post(
     post_data: schemas.PostCreate,
@@ -17,7 +18,8 @@ def create_post(
     new_post = models.Post(
         user_id=current_user.id,
         title=post_data.title,
-        content=post_data.content
+        content=post_data.content,
+        status="draft"
     )
 
     db.add(new_post)
@@ -32,11 +34,10 @@ def get_posts(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user)
 ):
-    posts = db.query(models.Post).filter(
+    return db.query(models.Post).filter(
         models.Post.user_id == current_user.id
     ).order_by(models.Post.updated_at.desc()).all()
 
-    return posts
 
 @router.get("/{post_id}", response_model=schemas.PostResponse)
 def get_post(
@@ -85,11 +86,11 @@ def update_post(
     return post
 
 
-@router.post("/{post_id}/publish", response_model=schemas.PostResponse)
-def publish_post(
+@router.delete("/{post_id}")
+def delete_post(
     post_id: int,
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user)
+    current_user: models.User = Depends(get_current_user),
 ):
     post = db.query(models.Post).filter(
         models.Post.id == post_id,
@@ -99,9 +100,7 @@ def publish_post(
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
 
-    post.status = "published"
-
+    db.delete(post)
     db.commit()
-    db.refresh(post)
 
-    return post
+    return {"message": "Post deleted successfully"}

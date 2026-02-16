@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Literal
 from datetime import datetime
 
 
@@ -25,6 +25,7 @@ class TokenResponse(BaseModel):
 class PostBase(BaseModel):
     title: Optional[str] = "Untitled"
     content: Dict[str, Any]
+    status: Literal["draft", "published"] = "draft"
 
 
 class PostCreate(PostBase):
@@ -32,16 +33,16 @@ class PostCreate(PostBase):
 
 
 class PostUpdate(BaseModel):
-    title: Optional[str]
-    content: Optional[Dict[str, Any]]
-    status: Optional[str]
+    title: Optional[str] = None
+    content: Optional[Dict[str, Any]] = None
+    status: Optional[Literal["draft", "published"]] = None
 
 
 class PostResponse(BaseModel):
     id: int
     title: str
     content: Dict[str, Any]
-    status: str
+    status: Literal["draft", "published"]
     created_at: datetime
     updated_at: datetime
 

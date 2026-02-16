@@ -11,7 +11,8 @@ interface EditorState {
   setContent: (content: any) => void;
   setTitle: (title: string) => void;
   setSaving: (saving: boolean) => void;
-  setLastSavedHash: (hash: string) => void;
+  setLastSavedHash: (hash: string | null) => void;
+  reset: () => void;
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -26,10 +27,23 @@ export const useEditorStore = create<EditorState>((set) => ({
       currentPostId: id,
       title,
       content,
+      lastSavedHash: JSON.stringify({
+        title,
+        content,
+      }), // initialize hash to prevent immediate auto-save
     }),
 
   setContent: (content) => set({ content }),
   setTitle: (title) => set({ title }),
   setSaving: (isSaving) => set({ isSaving }),
   setLastSavedHash: (lastSavedHash) => set({ lastSavedHash }),
+
+  reset: () =>
+    set({
+      currentPostId: null,
+      title: "",
+      content: null,
+      isSaving: false,
+      lastSavedHash: null,
+    }),
 }));
