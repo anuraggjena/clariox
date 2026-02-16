@@ -135,8 +135,7 @@ Deployed Backend: [https://clariox.onrender.com](https://clariox.onrender.com)
 
 ## 📂 Project Structure (Monorepo)
 
-`clariox/
-
+clariox/
 │
 ├── frontend/
 │   ├── src/
@@ -146,15 +145,18 @@ Deployed Backend: [https://clariox.onrender.com](https://clariox.onrender.com)
 │   │   ├── store/
 │   │   ├── services/
 │   │   └── types/
-│   └── vite.config.ts │
+│   │
+│   └── vite.config.ts
+│
 └── backend/
     ├── app/
     │   ├── routes/
-    │   ├── models.py 
-    │   ├── schemas.py 
     │   ├── core/
-    │   └── main.py 
-    └── requirements.txt` 
+    │   ├── models.py
+    │   ├── schemas.py
+    │   └── main.py
+    │
+    └── requirements.txt
 
 ----------
 
